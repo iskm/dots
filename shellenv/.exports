@@ -1,0 +1,80 @@
+#!/bin/bash
+
+# ranger settings
+# export RANGER_LOAD_DEFAULT_RC=FALSE
+
+#default browser
+# if [ -n "$DISPLAY"  ]; then
+#   export BROWSER=firefox --private
+# else
+#   export BROWSER=elinks
+# fi
+export BROWSER=firefox
+
+export FZF_DEFAULT_COMMAND="fdfind . $HOME"
+#export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_ALT_C_COMMAND="fdfind -t d . $HOME"
+
+# add custom home bin directory to global paths
+export PATH=$HOME/bin:$HOME/go/bin:/usr/local/bin:$PATH
+
+# add powerline for bash
+export PATH=$HOME/.local/bin:$PATH
+
+# add tmuxifier to path variable
+export PATH="$HOME/.tmuxifier/bin:$PATH"
+export TMUXIFIER_TMUX_OPTS="-2"
+
+# Make good 'ol vim the default editor for local and remote sessions
+export VISUAL=/usr/bin/vim;
+export EDITOR=/usr/bin/vim;
+# export TERM=xterm-256color  # for solarized ls listings
+# if [[ $TERM == screen ]]; then
+#   TERM=screen-256color
+# fi
+[[ $TMUX != "" ]] && export TERM="screen-256color";
+
+# if [[ $TERM == xterm ]]; then
+#   TERM=xterm-256color
+# fi
+
+# Larger bash history (allow 32³ entries; default is 500)
+export HISTSIZE=50000000;
+export HISTFILESIZE=$HISTSIZE;
+export HISTCONTROL=ignoredups;
+# Make some commands not show up in history
+export HISTIGNORE=" *:ls:cd:cd -:pwd:exit:date:* --help:* -h:pony:pony add *:pony update *:pony save *:pony ls:pony ls *";
+
+# Prefer US English and use UTF-8
+export LANG="en_US.UTF-8";
+export LC_ALL="en_US.UTF-8";
+export LC_CTYPE="en_US.UTF-8"
+
+# Highlight section titles in manual pages
+export LESS_TERMCAP_md="${yellow}";
+
+# Don’t clear the screen after quitting a manual page
+export MANPAGER="less -X";
+
+# gdal support
+export CPLUS_INCLUDE_PATH=/usr/include/gdal
+export C_INCLUDE_PATH=/usr/include/gdal
+
+# go lang
+export GOPATH=$HOME/go
+
+# gnome keyring
+if [ -n "$DESKTOP_SESSION" ];then
+        #eval $(gnome-keyring-daemon --start)
+        export SSH_AUTH_SOCK
+fi
+
+# ruby
+export GEM_HOME="$HOME/gems"
+export PATH="$HOME/gems/bin:$PATH"
+
+# k3s
+export KUBECONFIG=~/.kube/config
+
+

@@ -1,0 +1,160 @@
+" Goyo
+autocmd! User GoyoEnter Limelight
+autocmd! User GoyoLeave Limelight!
+"
+" Limelight 1 go
+map <F10> :Goyo <bar> :Limelight!! <CR>
+
+" fix airline
+"let g:airline_powerline_fonts = 1
+set laststatus=2
+
+""" Plugin configurations
+" appearance
+silent! colorscheme molokai
+
+" if running gui use different background like emacs
+" set to dark for complete dark
+" set to light for more light
+if has('gui_running')
+  set background=dark
+else
+  set background=dark
+endif
+
+" gitgutter
+let g:gitgutter_override_sign_column_highlight = 0
+set signcolumn=yes
+
+" airline
+" use powerline patched font
+let g:airline_powerline_fonts = 1
+
+" just use :StripWhitespace
+let g:better_whitespace_enabled = 0
+
+" recognize all Markdown files
+autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+let g:markdown_fenced_languages = ['c', 'cpp', 'csharp=cs', 'bash=sh', 'json']
+
+" use solarized dark airline theme
+let g:airline_theme='molokai'
+
+
+""" easy motion
+" <Leader>f{char} to move to {char}
+map  <Leader>fc <Plug>(easymotion-bd-f)
+nmap <Leader>fc <Plug>(easymotion-overwin-f)
+" s{char}{char} to move to {char}{char}
+nmap s <Plug>(easymotion-overwin-f2)
+" Move to line
+map <Leader>L <Plug>(easymotion-bd-jk)
+nmap <Leader>L <Plug>(easymotion-overwin-line)
+" Move to word
+map  <Leader>w <Plug>(easymotion-bd-w)
+nmap <Leader>w <Plug>(easymotion-overwin-w)
+
+" tagbar
+nmap <F8> :TagbarToggle<CR>
+
+" undotree 
+nmap <F5> :UndotreeToggle<CR>
+
+" Nerd tree
+map <F6> :NERDTreeToggle<CR>
+
+" UltiSnips config
+" Trigger configuration. Do not use <tab> if you use
+" https://github.com/Valloric/YouCompleteMe.
+" was c-k, c-b, c-z
+let g:UltiSnipsExpandTrigger="<c-j>" 
+let g:UltiSnipsJumpForwardTrigger="<c-j>"
+let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
+
+" youcompleteme
+let g:ycm_global_ycm_extra_conf = '~/.ycm_global_ycm_extra_conf'
+let g:ycm_confirm_extra_conf = 0
+" let g:ycm_server_python_interpreter = '/usr/bin/python2'
+
+
+" vim-javascript
+let g:javascript_plugin_jsdoc = 1
+let g:javascript_plugin_ngdoc = 1
+let g:javascript_plugin_flow = 1
+
+" NumberToggle
+let g:NumberToggleTrigger="<F2>"
+
+" vim-markdown
+let g:vim_markdown_folding_disabled = 1
+
+" vim-fswitch settings
+nnoremap <leader>fsh :FSSplitLeft<CR>
+nnoremap <leader>fsj :FSSplitBelow<CR>
+nnoremap <leader>fsk :FSSplitAbove<CR>
+nnoremap <leader>fsl :FSSplitRight<CR>
+nnoremap <leader>h : FSSplitRight<CR>
+
+" tmuxline settings
+"let g:tmuxline_preset = 'full' " nightly_fox, tmux
+
+" limelight settings
+let g:limelight_conceal_ctermfg = 256
+
+" ack
+if executable('ag')
+   let g:ackprg = 'ag --nogroup --nocolor --column --smart-case'
+elseif executable('ack-grep')
+   let g:ackprg="ack-grep -H --nocolor --nogroup --column"
+elseif executable('ack')
+  let g:ackprg='ack '
+endif
+
+" vim-easy-align
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign) 
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
+
+" CTrl-P
+let g:ctrlp_match_window = 'bottom,order:ttb'
+let g:ctrlp_switch_buffer = 0
+let g:ctrlp_working_path_mode = 0
+let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
+
+" transparent vim
+hi Normal ctermbg=none
+hi NonText ctermbg=none
+
+" vim latex preview
+let g:livepreview_previewer = 'zathura'
+autocmd Filetype tex setl updatetime=1
+
+" FZF shortcuts
+" File searches
+nnoremap <Leader>f :Files<CR>
+" Buffers list
+nnoremap <Leader>b :Files<CR>
+" Silver searcher
+nnoremap <Leader>ag :Ag<CR>
+" Rip grep
+nnoremap <Leader>rg :Rg<CR>
+" Current File content only
+nnoremap <Leader>g :Gfiles?<CR>
+" list files in the current git repository
+nnoremap <Leader>gf :Gfiles<CR>
+" search through previous git commits
+nnoremap <Leader>gc :Commits<CR>
+" switch branches real quick
+nnoremap <Leader>gb :Branches<CR>
+" search through tags
+nnoremap <Leader>t :Tags<CR>
+" history recent files
+nnoremap <Leader>h :History<CR>
+" list and jump to marks in your vim session
+nnoremap <Leader>m :Marks<CR>
+
+" lervag/vimtex
+let g:vimtex_view_method = 'zathura'

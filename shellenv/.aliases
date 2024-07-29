@@ -1,0 +1,126 @@
+#!/bin/bash
+
+# docker alias
+#alias docker='podman'
+# screensaver off
+alias screensaveroff='xset s off -dpms'
+# update all subdirectories with git files
+alias gitpullall='find . -mindepth 1 -maxdepth 1 -type d -print -exec git -C {} pull \;'
+
+alias info='info --vi-keys'
+
+# system utilites
+alias restartwifi='nmcli nm wifi off; nmcli nm wifi on'
+alias mountp='udiskctl mount -b /dev/sd'
+alias umountp='udisksctl unmount -b /dev/sd'
+
+
+# setup environment stuff
+alias running='ps -A | grep '
+
+# pacman
+alias cpi='rsync -ah --progress'
+alias pythone='ptpython'
+alias racketx='racket -il xrepl'
+alias sourceb='source ~/.bashrc'
+alias sourcez='source ~/.zshrc'
+# ssh shortcuts
+# my quick shortcuts
+alias pbcopy='xclip -selection clipboard'
+alias pbpaste='xclip -selection clipboard -o'
+
+# power
+alias shutdownnow='sudo shutdown -P now'
+alias shutdownat='sudo shutdown -P' # must specify a time
+alias reboot='sudo shutdown -r now'
+alias halt='sudo halt -P'
+
+# apt
+alias apuu='sudo apt-get update && sudo apt-get upgrade'
+
+# Easier navigation: .., ..., ...., ....., ~ and -
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+alias .....="cd ../../../.."
+alias ~="cd ~" # `cd` is probably faster to type though
+alias -- -="cd -"
+
+# Shortcuts
+alias dl="cd ~/Downloads"
+alias dt="cd ~/Desktop"
+alias p="cd ~/projects"
+alias g="git"
+alias h="history"
+alias j="jobs"
+
+# List all files colorized in long format
+alias l="ls -lF --color"
+
+# List all files colorized in long format, including dot files
+alias la="ls -laF --color"
+
+# List only directories
+alias lsd="ls -lF --color | grep --color=never '^d'"
+
+# Always use color output for `ls`
+alias ls="command ls --color"
+
+# Always enable colored `grep` output
+alias grep='grep --color=auto '
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
+
+# Enable aliases to be sudo’ed
+alias sudo='sudo '
+
+# get today's date
+# alias today='date +"%A, %B %-d, %Y"'
+# Get week number
+alias week='date +%V'
+
+# Stopwatch
+alias timer='echo "Timer started. Stop with Ctrl-D." && date && time cat && date'
+
+# Trim new lines and copy to clipboard
+alias c="tr -d '\n' | xclip -selection clipboard"
+
+# Merge PDF files
+# Usage: `mergepdf -o output.pdf input{1,2,3}.pdf`
+# on mac os
+# alias mergepdf='/System/Library/Automator/Combine\ PDF\ Pages.action/Contents/Resources/join.py'
+alias mergepdf="pdfunite"
+
+# Lock the screen (when going AFK)
+alias afk="i3lock -c 000000"
+
+# vhosts
+alias hosts='sudo vim /etc/hosts'
+
+# copy working directory
+alias cwd='pwd | tr -d "\r\n" | xclip -selection clipboard'
+
+# copy file interactive
+alias cp='cp -i'
+
+# move file interactive
+alias mv='mv -i'
+
+# remove file interactive
+alias rm='rm -i'
+
+# untar
+alias untar='tar xvf'
+
+# brightness
+alias bright='xrandr --output LVDS-1 --brightness '
+# alias cppc='cppcheck --std=c++11 --enable=all --suppress=missingIncludeSystem .'
+
+# tmux utilities
+alias tpmux='git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm'
+
+# better find
+alias fd='fdfind'
+
+# k8s
+alias kubectl="minikube kubectl --"

@@ -1,0 +1,68 @@
+" Download vim-plug if not already installed
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall | source $MYVIMRC
+endif
+
+" YCM plugin installation helper
+function! BuildYCM(info)
+  " info is a dictionary with 3 fields
+  " - name:   name of the plugin
+  " - status: 'installed', 'updated', or 'unchanged'
+  " - force:  set on PlugInstall! or PlugUpdate!
+  if a:info.status == 'installed' || a:info.force
+    " need to use python2 explicitly
+     "!./install.py --clang-completer --go-completer --js-completer
+     !./install.py --all
+  endif
+endfunction
+
+
+""" Plugins
+call plug#begin('~/.vim/plugged')
+""" core
+Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') } " completion engine for vim
+Plug 'flazz/vim-colorschemes'                           " color scheme pack
+Plug 'sheerun/vim-polyglot'                             " language pack for vim
+Plug 'w0rp/ale'                                         " Asynchronous linter
+Plug 'SirVer/ultisnips'                                 " snippet engine
+Plug 'honza/vim-snippets'                               " snippets
+Plug 'easymotion/vim-easymotion'                        " Movements
+Plug 'scrooloose/nerdcommenter'				" commenter
+Plug 'scrooloose/nerdtree'                              " Tree explorer for vim
+Plug 'airblade/vim-gitgutter'                           " git diff in the gutter
+
+Plug 'christoomey/vim-tmux-navigator'			" tmux integration for easy pane movement
+Plug 'derekwyatt/vim-fswitch'   " switch between header/source
+Plug 'editorconfig/editorconfig-vim'                      " helps manage coding styles 
+Plug 'EinfachToll/DidYouMean'                           " File guessing
+Plug 'jceb/vim-orgmode'                                 " org mode for vim
+Plug 'jeffkreeftmeijer/vim-numbertoggle'                " toggles between relative and absolute line numbers
+Plug 'jiangmiao/auto-pairs'                             " auto close brackets
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() }}
+Plug 'junegunn/fzf.vim'                                 " FZF
+Plug 'junegunn/goyo.vim'                                "distraction free writing in vim
+Plug 'junegunn/limelight.vim'                           " highlight focused paragraph
+Plug 'junegunn/vim-easy-align'                          " alignment like tabular
+Plug 'kien/ctrlp.vim'           " fuzzy file finder
+Plug 'majutsushi/tagbar'                                " Tagbar
+
+Plug 'mbbill/undotree' , { 'on': 'UndotreeToggle' }      " Edits graph
+Plug 'mhinz/vim-startify'                               "fancy startup for vim
+Plug 'mileszs/ack.vim'                                  " built in grep for vim
+Plug 'ntpeters/vim-better-whitespace'                   " Whitespace
+Plug 'terryma/vim-multiple-cursors'                     " multiple selections for vim
+Plug 'timakro/vim-searchant'  " improved search highlighting
+Plug 'tpope/vim-fugitive'                               " Git interface
+Plug 'tpope/vim-speeddating'                            " vim-orgmode depend
+Plug 'tpope/vim-surround'                               " manipulate comments 
+Plug 'vim-airline/vim-airline'                          " Status line
+Plug 'vim-airline/vim-airline-themes'                   " Status line themes
+Plug 'kien/rainbow_parentheses.vim'                              " color parenthes
+Plug 'pelodelfuego/vim-swoop'                           " search results in one buffer
+"Plug 'xuhdev/vim-latex-live-preview', { 'for': 'tex' }
+Plug 'lervag/vimtex'
+Plug 'preservim/vim-indent-guides'
+" Plug 'Chiel92/vim-autoformat'
+call plug#end()

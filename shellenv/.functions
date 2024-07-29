@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+today() {
+	echo -n "Today's date is: "
+	date +"%A, %B %-d, %Y"
+}
+
+# Create a new directory and enter it
+function mkd() {
+	mkdir -p "$@" && cd "$_";
+}
+
+pdfmerge() {
+    gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -dPDFSETTTINGS=/prepress\
+         -sOutputFile=$@ ;
+}
