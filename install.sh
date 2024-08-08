@@ -12,11 +12,13 @@ if [[ -f /etc/os-release ]]; then
   case "$ID_LIKE" in
     debian)
       echo "Running on debian-family. Installing core packages"
-      sudo apt install -y vim-nox git stow curl ranger tmux
+      package_manager=apt
+      sudo $package_manager install -y vim-nox git stow curl ranger tmux
       ;;
     fedora)
       echo "Running on debian-family. Installing core packages"
-      sudo apt install -y vim-enhanced git stow curl ranger tmux
+      package_manager=fedora
+      sudo $package_manager install -y vim-enhanced git stow curl ranger tmux
   esac
 else
   echo "You are running an unrecognized family of os. Quitting..."
