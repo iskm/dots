@@ -5,6 +5,12 @@
 
 set -e  # subshells inherit environment from parent
 
+function usage() {
+   echo "./install #installs and setups this environment"
+   echo "./install undo  #removes all configs"
+   echo "./install wipe #removes all configs and removes all installed packages"
+}
+
 # detect which family of distro i'm on
 if [[ -f /etc/os-release ]]; then
   . /etc/os-release
@@ -25,7 +31,26 @@ else
   exit 1
 fi
 
-echo "Installing packages"
-sudo $package_manager install -y $vim git stow curl ranger tmux
-# use gnu stow to symlink config files to home directory
-stow bash git ranger shellenv tmux vim
+# could have used a case, but i prefer the if statement
+if [[ -z "$1" ]]; then
+  echo "Installing packages"
+  sudo "$package_manager" install -y "$vim" git stow curl ranger tmux
+
+  # use gnu stow to symlink config files to home directory
+  stow bash git ranger shellenv tmux vim
+
+elif [[ undo = "$1" ]]; then
+  echo "undoing"
+  stow -D bash git ranger shellenv tmux vim
+
+elif [[ wipe = "$1" ]]; then
+  stow -D bash git ranger shellenv tmux vim
+  sudo "$package_manager" remove "$vim" git stow curl ranger tmux
+  echo "wiping"
+
+elif [[ "$1" = "help" ]]; then
+  usage
+
+fi
+  
+
