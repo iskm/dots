@@ -1,0 +1,46 @@
+---
+- name: installs and setups dotfiles and packages
+  hosts: localhost
+  tasks:
+    - name: test loops
+      debug:
+        msg: "{{ ansible_os_family }}"
+    - name: install packages on a debian host
+      apt:
+        name: "{{ item }}"
+        state: latest
+      loop:
+        - vim-nox
+        - git
+        - stow
+        - curl
+        - ranger
+        - tmux
+      when: ansible_os_family == "Debian"
+      become: yes
+
+    - name: install packages on redhat host
+      dnf:
+        name:
+          - vim-enhanced
+          - git
+          - stow
+          - curl
+          - ranger
+          - tmux
+        state: latest
+      when: ansible_os_family == "RedHat"
+      become: yes
+
+    - name: link the dotfiles to users home directory
+      command:
+        cmd: stow "{{ item }}"
+      loop:
+        - bash
+        - git
+        - ranger
+        - shellenv
+        - tmux
+        - vim
+        
+
