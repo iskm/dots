@@ -12,4 +12,4 @@ removes both the configs and packages installed
 
 if you find  yourself in a machine that has ansible pre-installed you could use
 it too to install
-```ansible-playbook localhost install.yml -ask-become-pass```
+```ansible-playbook install.yml --ask-become-pass```
