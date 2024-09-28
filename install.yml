@@ -40,7 +40,6 @@
         dest: "/home/{{ansible_user_id}}/{{item}}.bak"
       loop:
         - ".bashrc"
-        - ".bash_profile"
       when: ansible_user_id != "root"
 
     - name: delete old configs
