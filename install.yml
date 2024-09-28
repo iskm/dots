@@ -18,6 +18,7 @@
         - tmux
       when: ansible_os_family == "Debian"
       become: yes
+      become_user: root
 
     - name: install packages on redhat host
       dnf:
@@ -31,6 +32,23 @@
         state: latest
       when: ansible_os_family == "RedHat"
       become: yes
+      become_user: root
+
+    - name: copy old bash configs to ...bak
+      copy:
+        src: "/home/{ansible_user_id}/{item}"
+        dest: "/home/{ansible_user_id}/{item}.bak"
+      loop:
+        - ".bashrc"
+        - ".bash_profile"
+
+    - name: delete old configs
+      file:
+        path: "/home/{ansible_user_id}/{item}"
+        state: absent
+      loop:
+        - ".bashrc"
+        - ".bash_profile"
 
     - name: link the dotfiles to users home directory
       command:
@@ -42,5 +60,3 @@
         - shellenv
         - tmux
         - vim
-        
-
