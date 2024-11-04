@@ -1,4 +1,4 @@
-[![dots](https://github.com/iskm/dots/actions/workflows/main.yml/badge.svg)](https://github.com/iskm/dots/actions/workflows/main.yml)
+![tests](https://github.com/iskm/dots/actions/workflows/tests.yml/badge.svg)
 
 # dotfiles
 Quick configs i can't live without on my machines. 

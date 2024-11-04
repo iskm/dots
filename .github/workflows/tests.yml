@@ -1,5 +1,5 @@
 ---
-name: dots
+name: tests
 on:
   push:
     branches:
