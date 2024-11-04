@@ -1,3 +1,5 @@
+[![dots](https://github.com/iskm/dots/actions/workflows/main.yml/badge.svg)](https://github.com/iskm/dots/actions/workflows/main.yml)
+
 # dotfiles
 Quick configs i can't live without on my machines. 
 
