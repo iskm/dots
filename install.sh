@@ -50,7 +50,6 @@ elif [[ wipe = "$1" ]]; then
 
 elif [[ "$1" = "help" ]]; then
   usage
-
 fi
   
 
