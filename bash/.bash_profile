@@ -17,7 +17,7 @@ shopt -s histappend
 shopt -s cdspell
 
 # solarized directory color listings
-eval `dircolors $HOME/.dir_colors`
+# eval `dircolors $HOME/.dir_colors`
 
 # tmuxifier
-eval "$(starship init bash)"
+# eval "$(starship init bash)"

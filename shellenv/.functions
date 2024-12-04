@@ -14,3 +14,7 @@ pdfmerge() {
     gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -dPDFSETTTINGS=/prepress\
          -sOutputFile=$@ ;
 }
+
+apdoc () {
+	ansible-doc $1 | grep EXAMPLES -A 100 | less
+}
