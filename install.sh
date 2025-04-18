@@ -3,7 +3,6 @@
 # Author : Ibrahim Mkusa
 # Description: installs and sets up core environment for my dev work on servers
 
-set -e  # subshells inherit environment from parent
 function usage() {
    echo "./install #installs and setups this environment"
    echo "./install undo  #removes all configs"
@@ -19,7 +18,6 @@ if [[ -f /etc/os-release ]]; then
       echo "Running on debian-family.."
       package_manager=apt
       vim="vim-nox"
-      ansible="ansible"
       ;;
     fedora)
       echo "Running on rpm-family.."
@@ -35,9 +33,10 @@ fi
 # could have used a case, but i prefer the if statement
 if [[ -z "$1" ]]; then
   echo "Installing packages"
-  sudo "$package_manager" install -y "$vim" git stow curl ranger tmux "$ansible" 
+  sudo "$package_manager" install -y "$vim" git stow curl ranger tmux 
   # backup current configs
-  mv ~/.bashrc ~/.bashrc.bak;mv ~/.bash_profile ~/.bash_profile.bak
+  [[ -f ~/.bashrc ]] && mv ~/.bashrc ~/.bashrc.bak || echo "bashrc ~exists"
+  [[ -f ~/.bash_profile ]] && mv ~/.bash_profile ~/.bash_profile.bak || echo ".bash_profile ~exists"
   # use gnu stow to symlink config files to home directory
   stow bash ranger shellenv tmux vim
 elif [[ undo = "$1" ]]; then
