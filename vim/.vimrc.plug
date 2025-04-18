@@ -22,7 +22,7 @@ endfunction
 """ Plugins
 call plug#begin('~/.vim/plugged')
 """ core
-Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') } " completion engine for vim
+"Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') } " completion engine for vim
 Plug 'flazz/vim-colorschemes'                           " color scheme pack
 Plug 'sheerun/vim-polyglot'                             " language pack for vim
 Plug 'w0rp/ale'                                         " Asynchronous linter
