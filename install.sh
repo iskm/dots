@@ -43,7 +43,7 @@ fi
 if [[ -z "$1" ]]; then
   echo "Installing packages"
   sudo "$package_manager" install -y "$vim" git stow curl ranger tmux \
-    qemu-guest-agent $firewall
+    qemu-guest-agent $firewall cloud-init
 
   # firewall rules
   sudo $firewall allow ssh
