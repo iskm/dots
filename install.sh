@@ -39,7 +39,8 @@ fi
 # could have used a case, but i prefer the if statement
 if [[ -z "$1" ]]; then
   echo "Installing packages"
-  sudo "$package_manager" install -y "$vim" git stow curl ranger tmux 
+  sudo "$package_manager" install -y "$vim" git stow curl ranger tmux \
+    qemu-guest-agent
   # install vim-plug
   curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
