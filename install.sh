@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
-
-# Author : Ibrahim Mkusa
+# Author: Ibrahim Mkusa
 # Description: installs and sets up core environment for my dev work on servers
 
 function usage() {
@@ -24,21 +23,33 @@ if [[ -f /etc/os-release ]]; then
       package_manager=dnf
       vim="vim-enhanced"
       ansible="ansible-core"
+      ;;
+    *)
+      echo "Running on best-guess"
+      package_manager=apt
+      vim="vim-nox"
+      ;;
   esac
 else
   echo "You are running an unrecognized family of os. Quitting..."
   exit 1
 fi
 
+
 # could have used a case, but i prefer the if statement
 if [[ -z "$1" ]]; then
   echo "Installing packages"
   sudo "$package_manager" install -y "$vim" git stow curl ranger tmux 
+  # install vim-plug
+  curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+      https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
   # backup current configs
   [[ -f ~/.bashrc ]] && mv ~/.bashrc ~/.bashrc.bak || echo "bashrc ~exists"
   [[ -f ~/.bash_profile ]] && mv ~/.bash_profile ~/.bash_profile.bak || echo ".bash_profile ~exists"
   # use gnu stow to symlink config files to home directory
   stow bash ranger shellenv tmux vim
+  vim +PlugInstall +qall
 elif [[ undo = "$1" ]]; then
   echo "undoing"
   stow -D bash git ranger shellenv tmux vim
