@@ -17,17 +17,20 @@ if [[ -f /etc/os-release ]]; then
       echo "Running on debian-family.."
       package_manager=apt
       vim="vim-nox"
+      firewall="ufw"
       ;;
     fedora)
       echo "Running on rpm-family.."
       package_manager=dnf
       vim="vim-enhanced"
       ansible="ansible-core"
+      firewall=""  #firewall & firewall-cmd installed by default on rpm OSes
       ;;
     *)
       echo "Running on best-guess"
       package_manager=apt
       vim="vim-nox"
+      firewall="ufw"
       ;;
   esac
 else
@@ -40,7 +43,11 @@ fi
 if [[ -z "$1" ]]; then
   echo "Installing packages"
   sudo "$package_manager" install -y "$vim" git stow curl ranger tmux \
-    qemu-guest-agent
+    qemu-guest-agent $firewall
+
+  # firewall rules
+  sudo $firewall allow ssh
+
   # install vim-plug
   curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
@@ -48,8 +55,11 @@ if [[ -z "$1" ]]; then
   # backup current configs
   [[ -f ~/.bashrc ]] && mv ~/.bashrc ~/.bashrc.bak || echo "bashrc ~exists"
   [[ -f ~/.bash_profile ]] && mv ~/.bash_profile ~/.bash_profile.bak || echo ".bash_profile ~exists"
+
   # use gnu stow to symlink config files to home directory
   stow bash ranger shellenv tmux vim
+  
+  # install everything via plug "the vim package manager"
   vim +PlugInstall +qall
 elif [[ undo = "$1" ]]; then
   echo "undoing"
