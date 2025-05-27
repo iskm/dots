@@ -123,4 +123,4 @@ alias tpmux='git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm'
 alias fd='fdfind'
 
 # k8s
-alias kubectl="minikube kubectl --"
+# alias kubectl="minikube kubectl --"
