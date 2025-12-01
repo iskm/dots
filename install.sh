@@ -5,6 +5,9 @@
 # constants
 readonly ERROR_CODE=128
 
+# current working directory
+WORK_DIR=$(dirname $(readlink -f $0))
+
 usage() {
   cat <<EOF
 $0 #installs and setups this environment
@@ -20,6 +23,14 @@ terminate() {
   exit "${2:-128}"
 }
 
+header() {
+  cat <<EOF
+################################################################################
+${1}
+################################################################################
+EOF
+}
+
 if [[ $# -gt 1 ]]; then
   terminate "Too many variables" ${ERROR_CODE}
 fi
@@ -27,7 +38,7 @@ fi
 # detect which family of distro i'm on
 if [[ -f /etc/os-release ]]; then
   . /etc/os-release
-
+  header "Beginning installation script"
   case "$ID_LIKE" in
     debian)
       echo "Running on debian-family.."
@@ -90,3 +101,4 @@ fi
   
 # extras for tmux
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm || true
+header "Finished installation script"
