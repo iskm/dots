@@ -2,11 +2,27 @@
 # Author: Ibrahim Mkusa
 # Description: installs and sets up core environment for my dev work on servers
 
-function usage() {
-   echo "./install #installs and setups this environment"
-   echo "./install undo  #removes all configs"
-   echo "./install wipe #removes all configs and removes all installed packages"
+# constants
+readonly ERROR_CODE=128
+
+usage() {
+  cat <<EOF
+$0 #installs and setups this environment
+$0 undo  #removes all configs
+$0 wipe #removes all configs and removes all installed packages
+EOF
 }
+
+terminate() {
+  echo -e "Terminating program"
+  echo "${1}" >&2
+  usage
+  exit "${2:-128}"
+}
+
+if [[ $# -gt 1 ]]; then
+  terminate "Too many variables" ${ERROR_CODE}
+fi
 
 # detect which family of distro i'm on
 if [[ -f /etc/os-release ]]; then
@@ -35,7 +51,7 @@ if [[ -f /etc/os-release ]]; then
   esac
 else
   echo "You are running an unrecognized family of os. Quitting..."
-  exit 1
+  exit ${ERROR_CODE}
 fi
 
 
