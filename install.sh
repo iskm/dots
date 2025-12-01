@@ -6,7 +6,7 @@
 readonly ERROR_CODE=128
 
 # current working directory
-WORK_DIR=$(dirname $(readlink -f $0))
+WORK_DIR=$(dirname "$(readlink -f "$0")")
 
 usage() {
   cat <<EOF
@@ -37,7 +37,7 @@ fi
 
 # detect which family of distro i'm on
 if [[ -f /etc/os-release ]]; then
-  . /etc/os-release
+  source /etc/os-release
   header "Beginning installation script"
   case "$ID_LIKE" in
     debian)
@@ -50,7 +50,7 @@ if [[ -f /etc/os-release ]]; then
       echo "Running on rpm-family.."
       package_manager=dnf
       vim="vim-enhanced"
-      ansible="ansible-core"
+      #ansible="ansible-core"  # install via pip(x)
       firewall=""  #firewall & firewall-cmd installed by default on rpm OSes
       ;;
     *)
