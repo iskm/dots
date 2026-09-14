@@ -11,10 +11,15 @@
 # fi
 export BROWSER=firefox
 
-export FZF_DEFAULT_COMMAND="fdfind . $HOME"
-#export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
-export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-export FZF_ALT_C_COMMAND="fdfind -t d . $HOME"
+if command -v fd > /dev/null 2>&1; then
+  export FZF_DEFAULT_COMMAND="fd --hidden --exclude .git --type f"
+  export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+  export FZF_ALT_C_COMMAND="fd --hidden --exclude .git --type d"
+elif command -v fdfind > /dev/null 2>&1; then
+  export FZF_DEFAULT_COMMAND="fdfind --hidden --exclude .git --type f"
+  export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+  export FZF_ALT_C_COMMAND="fdfind --hidden --exclude .git --type d"
+fi
 
 # add custom home bin directory to global paths
 export PATH=$HOME/bin:$HOME/go/bin:/usr/local/bin:$PATH

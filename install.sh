@@ -70,7 +70,8 @@ fi
 if [[ -z "$1" ]]; then
   echo "Installing packages"
   sudo "$package_manager" install -y "$vim" git stow curl ranger tmux \
-    qemu-guest-agent $firewall cloud-init
+    qemu-guest-agent $firewall cloud-init bat jq yq kubectx just mtr \
+    hyperfine
 
   # firewall rules
   sudo $firewall allow ssh
